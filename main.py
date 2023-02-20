@@ -2,6 +2,9 @@ import cv2
 import os
 import datetime
 import numpy as np
+import time
+
+from progress_bar import progress_bar
 
 def FileSetup():
     # file setup
@@ -9,8 +12,8 @@ def FileSetup():
         os.makedirs('data')
 
 def IterateVid():
-    # vid = cv2.VideoCapture("video/newjean.mp4")
-    vid = cv2.VideoCapture("D:\Videos\John Wick Chapter 1, 2, 3 - Trilogy 2014-2019 Eng Subs 720p [H264-mp4]\John Wick Chapter - 1-2-3\John_Wick_Chapter_1.mp4")
+    vid = cv2.VideoCapture("video/newjean.mp4")
+    # vid = cv2.VideoCapture("D:\Videos\John Wick Chapter 1, 2, 3 - Trilogy 2014-2019 Eng Subs 720p [H264-mp4]\John Wick Chapter - 1-2-3\John_Wick_Chapter_1.mp4")
 
     # VIDEO DATA
     fps = vid.get(cv2.CAP_PROP_FPS)
@@ -30,6 +33,7 @@ def IterateVid():
     # iterator
     current_frame = 0
     colors = []
+    start_time = time.time()
     while vid.isOpened() and current_frame < frame_count:
         success, frame = vid.read()
 
@@ -37,9 +41,9 @@ def IterateVid():
         # cv2.imwrite('./data/frame{:d}.jpg'.format(current_frame), frame)
         current_frame += fps # i.e. at 30 fps, this advances one second
         vid.set(cv2.CAP_PROP_POS_FRAMES, current_frame)
-        print(current_frame)
+        progress_bar(current_frame, frame_count)
         colors.append(GetDominateColor(frame, int(height), int(width), current_frame))
-
+    print(f"\nProcess Finished in: {(time.time() - start_time):.2f}s")
     return colors
 
 def create_bar(height, width, color):

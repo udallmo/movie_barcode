@@ -92,7 +92,9 @@ def CreateImage(colors):
         bar[:] = rgb
         bars.append(bar)
     img_bar = np.hstack(bars)
-    cv2.imwrite('output/bar.jpg', img_bar)
+    print(bar[:5])
+    print(img_bar)
+    # cv2.imwrite('output/bar.jpg', img_bar)
 
 if __name__ == '__main__':
     FileSetup()

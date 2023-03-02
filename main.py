@@ -92,11 +92,14 @@ def CreateImage(colors):
         bar[:] = rgb
         bars.append(bar)
     img_bar = np.hstack(bars)
-    print(bar[:5])
-    print(img_bar)
+    # print(bars[0])
+    # print(bar[:5])
+    # print(img_bar)
+    # np.savetxt('sample.csv', , fmt='&d', delimiter=",")
     # cv2.imwrite('output/bar.jpg', img_bar)
 
 if __name__ == '__main__':
     FileSetup()
     colors = IterateVid()
+    np.savetxt('sample.csv', np.asarray(colors), fmt="%d", delimiter=",")
     CreateImage(colors)

@@ -5,6 +5,7 @@ import numpy as np
 import time
 
 from progress_bar import progress_bar
+from diagonal_output import createCircle
 
 def FileSetup():
     # file setup
@@ -101,5 +102,7 @@ def CreateImage(colors):
 if __name__ == '__main__':
     FileSetup()
     colors = IterateVid()
-    np.savetxt('sample.csv', np.asarray(colors), fmt="%d", delimiter=",")
-    CreateImage(colors)
+    # np.savetxt('sample.csv', np.asarray(colors), fmt="%d", delimiter=",")
+    # print(colors[:4])
+    createCircle(colors)
+    # CreateImage(colors)

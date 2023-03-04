@@ -5,9 +5,8 @@ import cv2
 from helper.dominateColors import GetDominateColor
 from helper.progressBar import progressBar
 
-def IterateVid():
-    # TODO: CMD arguments
-    vid = cv2.VideoCapture("video/newjean.mp4")
+def IterateVid(filePath):
+    vid = cv2.VideoCapture(filePath)
 
     # VIDEO DATA
     fps = vid.get(cv2.CAP_PROP_FPS)
@@ -35,6 +34,8 @@ def IterateVid():
         current_frame += fps 
         vid.set(cv2.CAP_PROP_POS_FRAMES, current_frame)
         progressBar(current_frame, frame_count)
-        colors.append(GetDominateColor(frame, int(height), int(width)))
+        color = GetDominateColor(frame, int(height), int(width))
+        if color:
+            colors.append(color)
     print(f"\nProcess Finished in: {(time.time() - start_time):.2f}s")
-    return colors
+    return colors, frame_count

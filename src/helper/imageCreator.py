@@ -10,9 +10,9 @@ offset = size / 8
 
 # Set the size for the rectangle
 h = 720
-w = 5
+w = 1
 
-def createBars(colors):
+def createBars(colors, name):
     bars = []
     print('creating bar')
     for rgb in colors:
@@ -20,10 +20,10 @@ def createBars(colors):
         bar[:] = rgb
         bars.append(bar)
     img_bar = np.hstack(bars)
-    cv2.imwrite('output/bar.png', img_bar)
+    cv2.imwrite(f'output/bar_{name}.png', img_bar)
     print('bar completed')
 
-def createCircle(colors):
+def createCircle(colors, name):
     print('creating circle')
     # Create an array of RGB color values
 
@@ -61,5 +61,5 @@ def createCircle(colors):
 
     # Save the image
     # image.show()
-    image.save('./output/circle.png')
+    image.save(f'./output/circle_{name}.png')
     print('circle completed')

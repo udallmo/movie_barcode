@@ -1,15 +1,17 @@
 import os
+import sys
 
 from helper.imageCreator import createCircle, createBars
 from helper.IterateVideo import IterateVid
 
 def FileSetup():
-    # file setup
-    if not os.path.exists("data"):
-        os.makedirs('data')
+    if len(sys.argv) != 3: 
+        raise Exception("Missing Arguments")
+
+    return sys.argv[1], sys.argv[2]
 
 if __name__ == '__main__':
-    FileSetup()
-    colors = IterateVid()
-    createBars(colors)
-    createCircle(colors)
+    filePath, name = FileSetup()
+    colors, frame_count = IterateVid(filePath)
+    createBars(colors, name)
+    createCircle(colors, name)

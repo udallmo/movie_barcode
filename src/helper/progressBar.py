@@ -1,4 +1,4 @@
-def progress_bar(progress, total):
+def progressBar(progress, total):
     percent = 100 * (progress / float(total))
     bar = ("X" * int(percent)) + '-' * (100-int(percent))
 

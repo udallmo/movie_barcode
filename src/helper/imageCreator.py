@@ -1,16 +1,31 @@
 from PIL import Image, ImageDraw
-import colorsys
 import math
+import cv2
+import numpy as np
 
+# Set the size of the color wheel and the radius of the circle
+size = 4000
+radius = size / 2
+offset = size / 8
+
+# Set the size for the rectangle
+h = 720
+w = 5
+
+def createBars(colors):
+    bars = []
+    print('creating bar')
+    for rgb in colors:
+        bar = np.zeros((h, w, 3), np.uint8)
+        bar[:] = rgb
+        bars.append(bar)
+    img_bar = np.hstack(bars)
+    cv2.imwrite('output/bar.png', img_bar)
+    print('bar completed')
 
 def createCircle(colors):
-    # Set the size of the color wheel and the radius of the circle
-    size = 4000
-    radius = size / 2
-    offset = size/8
-    print('creating cirlce')
+    print('creating circle')
     # Create an array of RGB color values
-    # colors = [(61, 44, 68), (69, 52, 75), (73, 57, 80), (17, 4, 16)]
 
     # Create a new image with a transparent background
     image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
@@ -46,4 +61,5 @@ def createCircle(colors):
 
     # Save the image
     # image.show()
-    image.save('color_wheel.png')
+    image.save('./output/circle.png')
+    print('circle completed')
